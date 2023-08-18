@@ -111,7 +111,7 @@ public class AuthorizationServerConfig {
 
     @Bean
     public AuthorizationServerSettings authorizationServerSettings() {
-        return AuthorizationServerSettings.builder().issuer("http://auth-server:8082").build();
+        return AuthorizationServerSettings.builder().build();
     }
 
     private static RSAKey generateRsa() throws NoSuchAlgorithmException {
