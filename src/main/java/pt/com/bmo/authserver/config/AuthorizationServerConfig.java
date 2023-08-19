@@ -11,8 +11,10 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -87,6 +89,8 @@ public class AuthorizationServerConfig {
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                 .redirectUri("http://127.0.0.1:8081/login/oauth2/code/users-client-oidc")
                 .redirectUri("http://127.0.0.1:8081/authorized")
+                .redirectUri("http://127.0.0.1:4200/authorized")
+                .redirectUri("https://list4u-front.herokuapp.com/authorized")
                 .postLogoutRedirectUri("http://127.0.0.1:8081/")
                 .scope(OidcScopes.OPENID)
                 .scope(OidcScopes.PROFILE)
