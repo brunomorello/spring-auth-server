@@ -65,7 +65,8 @@ public class AuthorizationServerConfig {
 
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeHttpRequests(requests -> requests.anyRequest().authenticated())
+        httpSecurity
+                .authorizeHttpRequests(requests -> requests.anyRequest().authenticated())
                 .formLogin(Customizer.withDefaults());
         return httpSecurity.build();
     }
@@ -107,7 +108,7 @@ public class AuthorizationServerConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200/", "https://list4u-front.herokuapp.com/"));
         corsConfiguration.setAllowedMethods(Arrays.asList("GET","POST","PATCH", "PUT", "DELETE", "OPTIONS", "HEAD"));
         corsConfiguration.setAllowCredentials(true);
         corsConfiguration.setAllowedHeaders(Arrays.asList("Authorization", "Requestor-Type"));
