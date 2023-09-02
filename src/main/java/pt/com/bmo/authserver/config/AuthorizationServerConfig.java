@@ -109,28 +109,17 @@ public class AuthorizationServerConfig {
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
-//        CorsConfiguration corsConfiguration = new CorsConfiguration();
-////        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200/", ""));
-//        corsConfiguration.setAllowedOriginPatterns(Arrays.asList("http://localhost:[*]", "https://*.herokuapp.com:[*]"));
-//        corsConfiguration.setAllowedMethods(Arrays.asList("GET","POST","PATCH", "PUT", "DELETE", "OPTIONS", "HEAD"));
-//        corsConfiguration.setAllowCredentials(true);
-//        corsConfiguration.setAllowedHeaders(Arrays.asList("Authorization", "Requestor-Type"));
-//        corsConfiguration.setExposedHeaders(Arrays.asList("X-Get-Header"));
-//        corsConfiguration.setMaxAge(3600L);
-//
-//        UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
-//        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
-//        return urlBasedCorsConfigurationSource;
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.setAllowedOriginPatterns(Arrays.asList("http://localhost:[*]", "https://*.herokuapp.com:[*]"));
+        corsConfiguration.setAllowedMethods(Arrays.asList("GET","POST","PATCH", "PUT", "DELETE", "OPTIONS", "HEAD"));
+        corsConfiguration.setAllowCredentials(true);
+        corsConfiguration.setAllowedHeaders(Arrays.asList("Authorization", "Requestor-Type"));
+        corsConfiguration.setExposedHeaders(Arrays.asList("X-Get-Header"));
+        corsConfiguration.setMaxAge(3600L);
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration cors = new CorsConfiguration();
-        cors.addAllowedHeader("*");
-        cors.addAllowedMethod("*");
-        cors.addAllowedOrigin("*");
-        cors.setAllowCredentials(true);
-        source.registerCorsConfiguration("/**", cors);
-
-        return source;
+        UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
+        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
+        return urlBasedCorsConfigurationSource;
     }
 
     @Bean
