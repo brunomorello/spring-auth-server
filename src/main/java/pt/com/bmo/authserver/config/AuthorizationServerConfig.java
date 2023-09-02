@@ -67,8 +67,10 @@ public class AuthorizationServerConfig {
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests(requests -> requests.anyRequest().authenticated())
-                .formLogin(Customizer.withDefaults());
+                .formLogin(Customizer.withDefaults())
+                .cors(Customizer.withDefaults());
         return httpSecurity.build();
+
     }
 
     @Bean
@@ -107,17 +109,28 @@ public class AuthorizationServerConfig {
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200/", "https://list4u-front.herokuapp.com/"));
-        corsConfiguration.setAllowedMethods(Arrays.asList("GET","POST","PATCH", "PUT", "DELETE", "OPTIONS", "HEAD"));
-        corsConfiguration.setAllowCredentials(true);
-        corsConfiguration.setAllowedHeaders(Arrays.asList("Authorization", "Requestor-Type"));
-        corsConfiguration.setExposedHeaders(Arrays.asList("X-Get-Header"));
-        corsConfiguration.setMaxAge(3600L);
+//        CorsConfiguration corsConfiguration = new CorsConfiguration();
+////        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200/", ""));
+//        corsConfiguration.setAllowedOriginPatterns(Arrays.asList("http://localhost:[*]", "https://*.herokuapp.com:[*]"));
+//        corsConfiguration.setAllowedMethods(Arrays.asList("GET","POST","PATCH", "PUT", "DELETE", "OPTIONS", "HEAD"));
+//        corsConfiguration.setAllowCredentials(true);
+//        corsConfiguration.setAllowedHeaders(Arrays.asList("Authorization", "Requestor-Type"));
+//        corsConfiguration.setExposedHeaders(Arrays.asList("X-Get-Header"));
+//        corsConfiguration.setMaxAge(3600L);
+//
+//        UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
+//        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
+//        return urlBasedCorsConfigurationSource;
 
-        UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
-        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
-        return urlBasedCorsConfigurationSource;
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration cors = new CorsConfiguration();
+        cors.addAllowedHeader("*");
+        cors.addAllowedMethod("*");
+        cors.addAllowedOrigin("*");
+        cors.setAllowCredentials(true);
+        source.registerCorsConfiguration("/**", cors);
+
+        return source;
     }
 
     @Bean
