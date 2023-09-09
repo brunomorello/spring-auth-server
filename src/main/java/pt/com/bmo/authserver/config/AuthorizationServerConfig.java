@@ -91,7 +91,6 @@ public class AuthorizationServerConfig {
                 .clientId("list4u-dev")
                 .clientSecret("{noop}myClientSecretValue")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
-//                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                 .redirectUri("http://127.0.0.1:8081/login/oauth2/code/users-client-oidc")
@@ -102,12 +101,12 @@ public class AuthorizationServerConfig {
                 .scope(OidcScopes.OPENID)
                 .scope(OidcScopes.PROFILE)
                 //.clientSettings(ClientSettings.builder().requireProofKey(true).build())
-//                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
                 .build();
         return new InMemoryRegisteredClientRepository(registeredClient);
     }
 
     @Bean
+    @Order(Ordered.HIGHEST_PRECEDENCE)
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowedOriginPatterns(Arrays.asList("http://localhost:[*]", "https://*.herokuapp.com:[*]"));
