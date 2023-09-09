@@ -110,7 +110,7 @@ public class AuthorizationServerConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
 //        corsConfiguration.setAllowedOriginPatterns(Arrays.asList("http://localhost:[*]", "https://*.herokuapp.com:[*]"));
-        corsConfiguration.setAllowedOrigins(Arrays.asList("https://list4u-front.herokuapp.com/"));
+        corsConfiguration.setAllowedOriginPatterns(Arrays.asList("*"));
         corsConfiguration.setAllowedMethods(Arrays.asList("GET","POST","PATCH", "PUT", "DELETE", "OPTIONS", "HEAD"));
         corsConfiguration.setAllowCredentials(true);
         corsConfiguration.setAllowedHeaders(Arrays.asList("Authorization", "Requestor-Type"));
